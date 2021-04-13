@@ -20,33 +20,35 @@ from Manager.modules.helper_funcs.chat_status import is_user_admin
 from Manager.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hello {}, my name is {}!
+Hello *{}*, my name is *{}*!
+ɪ ᴄᴀɴ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇғғɪᴄɪᴇɴᴛʟʏ, ᴀᴅᴅ ᴍᴇ ᴛᴏ ᴀ ɢʀᴏᴜᴘ ᴀɴᴅ sᴇᴇ ᴍʏ ᴍᴀɢɪᴄ. 
 
-You know how hard it is sometimes to manage group so here is the solution for you.
+*Made & Maintained by* [Divyansh 🇮🇳](t.me/divyansh_choudhary)
+**Updates Channel📣**: [Click here](t.me/igroupzoid) 
 
-My owner is [Aditya 🇮🇳](t.me/xditya)
+Click /help to find out more about how to use me.
+Add me in Group by Clicking [here](https://t.me/TheGroupZoidBot?startgroup=true) 
 
-Click /help or Help button below to find out more about how to use me to my full potential.
 """
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
+Version :- *v2.0.1*
 Group Management Bot with advanced features. 
-*Main* commands available:
- - /start: start the bot
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
- - /donate: information about how to donate!
- - /settings:
+💠*Main* commands available:
+🔸- /start: start the bot
+🔹- /help: PM's you this message.
+🔸- /help <module name>: PM's you info about that module.
+🔹- /donate: information about how to donate!
+🔸- /settings:
    - in PM: will send you your settings for all supported modules.
    - in a group: will redirect you to pm, with all that chat's settings.
- 
-Pls note that this repo is based on Saitama Bot and GroupManager Bot.
-
+   
+Please note that this is the 2.0 version of @GroupZoidBot
 {}
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
-DONATE_STRING = """Heya, glad to hear you want to donate! I'm not accepting any donations right now, still, if needed, drop a thanks to @xditya."""
+DONATE_STRING = """Heya, glad to hear you want to donate! I'm not accepting any donations right now, still, if needed, donate to [Divyansh 🇮🇳](https://t.me/Divyansh_Choudhary)"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -138,7 +140,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), SUPPORT_CHAT),
                 parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     else:
-        update.effective_message.reply_text("Yo, whadup?")
+        update.effective_message.reply_text("Yo, whatsUp? **I'm Alive.**")
 
 
 # for test purposes
@@ -185,7 +187,7 @@ def help_button(bot: Bot, update: Update):
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(
-                                         [[InlineKeyboardButton(text="Back", callback_data="help_back")]]))
+                                         [[InlineKeyboardButton(text=""🚶Back", callback_data="help_back")]]))
 
         elif prev_match:
             curr_page = int(prev_match.group(1))
@@ -239,7 +241,7 @@ def get_help(bot: Bot, update: Update):
         module = args[1].lower()
         text = "Here is the available help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
                + HELPABLE[module].__help__
-        send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text="Back", callback_data="help_back")]]))
+        send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text=""🚶Back", callback_data="help_back")]]))
 
     else:
         send_help(chat.id, HELP_STRINGS)
@@ -290,7 +292,7 @@ def settings_button(bot: Bot, update: Update):
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(
-                                         [[InlineKeyboardButton(text="Back",
+                                         [[InlineKeyboardButton(text=""🚶Back",
                                                                 callback_data="stngs_back({})".format(chat_id))]]))
 
         elif prev_match:
